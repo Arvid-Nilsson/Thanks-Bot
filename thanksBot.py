@@ -31,7 +31,7 @@ async def on_message(message):
     return
   if message.content.startswith('!thanks'):
 
-    author = message.author
+    author = message.reference.resolved.author
     id = author.id
     
     mo.incrementScore(collection, id)
