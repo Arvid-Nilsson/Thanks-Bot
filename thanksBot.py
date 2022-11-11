@@ -1,19 +1,26 @@
 import discord
+from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-
+#Setting discord intents
 intents = discord.Intents.default()
 intents.message_content = True
 
 client = discord.Client(intents=intents)
 
+#logging inte database
+cluster = MongoClient(os.getenv('CLUSTER'))
+
+db = cluster.thanksBot
+
+collection = db.userScore
+
 @client.event
 async def on_ready():
   print("Logged in as {0.user}".format(client))
-
 
 @client.event
 async def on_message(message):
