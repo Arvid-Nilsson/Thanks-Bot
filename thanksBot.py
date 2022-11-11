@@ -2,6 +2,7 @@ import discord
 from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
+import module as mo
 
 load_dotenv()
 
@@ -24,11 +25,20 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+
+  #make shure message isn´t comming from bot
   if message.author == client.user:
     return
-  if message.content.startswith('$hello'):
-    id = message.author.id
-    await message.channel.send(id)
+  if message.content.startswith('!thanks'):
+
+    author = message.author
+    id = author.id
+    
+    mo.incrementScore(collection, id)
+
+    results = collection.find_one({"_id": id})
+
+    await message.channel.send("tack {} nu har du {} poeng" .format(author, results["score"])) 
 
 
 client.run(os.getenv("discordToken"))
