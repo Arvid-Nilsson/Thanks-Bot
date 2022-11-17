@@ -44,8 +44,11 @@ async def on_message(message):
 
 
     else:
-
-      author = message.reference.resolved.author
+      try:
+        author = message.reference.resolved.author
+      except:
+        return
+        
       id = author.id
 
       dmu.incrementScore(collection, id)
