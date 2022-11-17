@@ -33,10 +33,16 @@ async def on_message(message):
     collection = dmu.getCollection(db, message)
 
     #Give user their points if they write !thanks get score
-    if "get score" in message.content:
+    if "get score" in message.content.lower():
       results = dmu.getScore(collection, message)
 
       await message.channel.send(f"du har {results} poäng")
+
+    #Give instructional text if user writes !thanks help
+    elif "help" in message.content.lower():
+      with open("Help.txt") as f:
+        content = f.read()
+        await message.channel.send(content)
 
     #Give the author of the replied to message points for helping
     else:
