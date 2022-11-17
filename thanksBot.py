@@ -2,7 +2,7 @@ import discord
 from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
-import module as mo
+import discordMongoUtilities as dmu
 
 load_dotenv()
 
@@ -33,9 +33,9 @@ async def on_message(message):
     author = message.reference.resolved.author
     id = author.id
 
-    collection = mo.getCollection(db, message)
+    collection = dmu.getCollection(db, message)
     
-    mo.incrementScore(collection, id)
+    dmu.incrementScore(collection, id)
 
     results = collection.find_one({"_id": id})
 
