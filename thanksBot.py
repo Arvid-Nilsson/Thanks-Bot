@@ -30,16 +30,29 @@ async def on_message(message):
 
   if message.content.startswith('!thanks'):
 
-    author = message.reference.resolved.author
-    id = author.id
-
     collection = dmu.getCollection(db, message)
+
+    if "get score" in message.content:
     
-    dmu.incrementScore(collection, id)
+      """ id = message.author.id
 
-    results = collection.find_one({"_id": id})
+      results = collection.find_one({"_id": id}) """
 
-    await message.channel.send("tack {} nu har du {} poäng" .format(author, results["score"])) 
+      results = dmu.getScore(collection, message)
+
+      await message.channel.send(f"du har {results} poäng")
+
+
+    else:
+
+      author = message.reference.resolved.author
+      id = author.id
+
+      dmu.incrementScore(collection, id)
+
+      results = collection.find_one({"_id": id})
+
+      await message.channel.send("tack {} nu har du {} poäng" .format(author, results["score"])) 
 
 
 client.run(os.getenv("discordToken"))
