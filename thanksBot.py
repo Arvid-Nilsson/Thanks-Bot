@@ -32,17 +32,13 @@ async def on_message(message):
 
     collection = dmu.getCollection(db, message)
 
+    #Give user their points if they write !thanks get score
     if "get score" in message.content:
-    
-      """ id = message.author.id
-
-      results = collection.find_one({"_id": id}) """
-
       results = dmu.getScore(collection, message)
 
       await message.channel.send(f"du har {results} poäng")
 
-
+    #Give the author of the replied to message points for helping
     else:
       try:
         author = message.reference.resolved.author
