@@ -17,8 +17,6 @@ cluster = MongoClient(os.getenv('CLUSTER'))
 
 db = cluster.thanksBot
 
-collection = db.userScore
-
 @client.event
 async def on_ready():
   print("Logged in as {0.user}".format(client))
@@ -34,6 +32,8 @@ async def on_message(message):
 
     author = message.reference.resolved.author
     id = author.id
+
+    collection = mo.getCollection(db, message)
     
     mo.incrementScore(collection, id)
 

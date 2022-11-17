@@ -5,3 +5,13 @@ def incrementScore(location, uid, i = 1):
       location.update_one({"_id": uid}, {"$inc": {"score": i}})
     else:
       location.insert_one({"_id": uid, "score": i})
+
+def getCollection(db, message):
+  servID = message.guild.id
+
+  collection = db[str(servID)]
+
+  return collection
+
+
+
