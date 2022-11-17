@@ -1,13 +1,17 @@
 from pymongo import MongoClient
 
 def incrementScore(location, uid, i = 1):
-    if type(location.find_one({"_id": uid})) == dict:
-      location.update_one({"_id": uid}, {"$inc": {"score": i}})
+  """Increment score of user or if it does not exist makes a document"""
+
+  if type(location.find_one({"_id": uid})) == dict:
+    location.update_one({"_id": uid}, {"$inc": {"score": i}})
       
-    else:
-      location.insert_one({"_id": uid, "score": i})
+  else:
+    location.insert_one({"_id": uid, "score": i})
 
 def getScore(collection, message):
+  """Returns the user score. Takes two arguments collection and message"""
+
   id = message.author.id
 
   results = collection.find_one({"_id": id})
@@ -19,6 +23,7 @@ def getScore(collection, message):
     return 0
 
 def getCollection(db, message):
+  """Returns collection for server. If colection doesn't exist it makes a collection"""
 
   servID = message.guild.id
 

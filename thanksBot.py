@@ -36,12 +36,13 @@ async def on_message(message):
     if "get score" in message.content.lower():
       results = dmu.getScore(collection, message)
 
-      await message.channel.send(f"du har {results} poäng")
+      await message.channel.send(f"Du har {results} poäng")
 
     #Give instructional text if user writes !thanks help
     elif "help" in message.content.lower():
       with open("Help.txt") as f:
         content = f.read()
+
         await message.channel.send(content)
 
     #Give the author of the replied to message points for helping
@@ -57,7 +58,9 @@ async def on_message(message):
 
       results = collection.find_one({"_id": id})
 
-      await message.channel.send("tack {} nu har du {} poäng" .format(author, results["score"])) 
+      await message.channel.send("Tack {} nu har du {} poäng" .format(author, results["score"])) 
 
 
-client.run(os.getenv("discordToken"))
+#Run bot
+if __name__ == "__main__":
+  client.run(os.getenv("discordToken"))
