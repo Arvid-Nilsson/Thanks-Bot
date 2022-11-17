@@ -1,0 +1,5 @@
+Welcome to thanksBOT
+
+Reply to a message with !thanks to give the user 1 point for helping you
+
+Write !thanks get score to get your score
