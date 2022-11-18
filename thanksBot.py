@@ -1,7 +1,7 @@
-import discord
-from pymongo import MongoClient
 import os
+import discord
 from dotenv import load_dotenv
+from pymongo import MongoClient
 import discordMongoUtilities as dmu
 
 load_dotenv()
@@ -29,7 +29,7 @@ async def on_message(message):
   if message.author == client.user:
     return
 
-  if message.content.startswith('!thanks'):
+  if message.content.startswith('!thanks'): 
 
     collection = dmu.getCollection(db, message)
 
