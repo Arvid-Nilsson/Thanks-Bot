@@ -21,6 +21,7 @@ db = cluster.thanksBot
 async def on_ready():
   print("Logged in as {0.user}".format(client))
 
+
 @client.event
 async def on_message(message):
 
@@ -47,6 +48,7 @@ async def on_message(message):
 
     #Give the author of the replied to message points for helping
     else:
+      #Making shure that the message is a reply
       try:
         author = message.reference.resolved.author
       except:
