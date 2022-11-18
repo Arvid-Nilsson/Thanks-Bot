@@ -24,7 +24,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
 
-  #make shure message isn´t comming from bot
+  #Make shure message isn´t comming from bot
   if message.author == client.user:
     return
 

@@ -9,12 +9,12 @@ def incrementScore(location, uid, i = 1):
   else:
     location.insert_one({"_id": uid, "score": i})
 
-def getScore(collection, message):
+def getScore(location, message):
   """Returns the user score. Takes two arguments collection and message"""
 
   id = message.author.id
 
-  results = collection.find_one({"_id": id})
+  results = location.find_one({"_id": id})
 
   if type(results) == dict:
     return results["score"]
