@@ -1,5 +1,3 @@
-from pymongo import MongoClient
-
 def incrementScore(location, uid, i = 1):
   """Increment score of user or if it does not exist makes a document"""
 
